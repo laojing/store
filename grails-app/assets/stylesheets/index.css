@@ -1,0 +1,120 @@
+.container {
+	width:100%;
+	color: #616161; 
+}
+
+
+.store, .course, .project {
+	padding: 30px 0;
+	color: #616161; 
+}
+
+.store, .course, .project h2{
+    font-family: 'nav_font';
+	font-size: 20px;
+	text-align: center; 
+}
+
+.storeover a {
+	color: #666; 
+}
+.storeover a:hover {
+	color: #222; 
+}
+
+.course ul,
+.project ul,
+.store ul { 
+	font-family: YaHei Consolas Hybrid;
+	list-style: none;
+	overflow: hidden;
+	margin-top: 50px; 
+}
+
+.course ul li,
+.project ul li,
+.store ul li { 
+	float: left;
+	height: 250px;
+	margin: 0 20px; 
+}
+
+.course h2,
+.store ul h2 {
+	font-size: 16px;
+	font-family: YaHei Consolas Hybrid;
+	border-top: 1px solid #888;
+	border-bottom: 1px solid #888;
+	padding: 10px 0;
+	margin-bottom: 10px; 
+}
+
+.store ul h3 {
+	font-size: 12px;
+	text-align: right;
+	margin-bottom: 20px; 
+}
+
+.course p,
+.project ul li p,
+.store ul li p { 
+	font-size: 12px;
+	text-align: justify;
+	line-height: 20px;
+	text-indent: 2em; 
+}
+
+.project {
+	margin-top: -20px;
+	background-color: #ddd; 
+}
+
+.project ul li {
+	float: left;
+	background-color: white;
+	box-shadow: 2px 5px 4px #888888;
+	margin: 10px 20px; 
+}
+
+.project ul h2 { 
+	font-family: YaHei Consolas Hybrid;
+	color: #333;
+	text-align: left;
+	font-size: 16px;
+	border-bottom: 1px solid #888;
+	padding: 10px 0;
+	margin: 10px 20px; 
+}
+
+.project ul h3 { 
+	font-family: YaHei Consolas Hybrid;
+	color: #616161;
+	font-size: 12px;
+	text-align: right;
+	margin-right: 20px;
+	margin-bottom: 20px; 
+}
+
+.project ul li p {
+	color: #616161;
+	margin: 0 20px;
+	font-size: 12px;
+	text-align: justify;
+	line-height: 20px;
+	text-indent: 2em; 
+}
+
+.course img { 
+	width:60px;
+	margin-bottom: 20px;
+}
+
+
+.seperatorindex {
+	width: 100%;
+	height:3px;
+	margin-bottom: 20px;
+    border-top: 1px #dddddd solid;
+    border-bottom: 1px #eeeeee solid;
+}
+

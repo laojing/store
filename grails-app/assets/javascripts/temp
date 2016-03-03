@@ -1,0 +1,208 @@
+function turbine3djj( root ) {
+	var width = $('#threecanvas').width();
+	var height = $('#threecanvas').height();
+		// create a scene, that will hold all our elements such as objects, cameras and lights.
+		var scene = new THREE.Scene();
+
+		// create a camera, which defines where we're looking at.
+		var camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+
+		scene.add( new THREE.AmbientLight( 0x333333 ) );
+		// create a render and set the size
+		var renderer = new THREE.WebGLRenderer();
+
+		renderer.setSize(width, height);
+
+		// create ground
+		var groundGeometry = new THREE.CubeGeometry(40,2,40);
+		var groundMaterial = new THREE.MeshLambertMaterial({color: 0xee55ff});
+		var ground = new THREE.Mesh(groundGeometry, groundMaterial);
+		ground.castShadow = true;
+		scene.add( ground );
+		ground.position.x=0;
+		ground.position.y=-90;
+		ground.position.z=0;
+
+		/*
+		var north = new THREE.Mesh(
+										new THREE.SphereGeometry(1,20,20),
+										new THREE.MeshLambertMaterial({color: 0x007755}) );
+		north.position.x=25;
+		ground.add(north);
+		*/
+
+		var northarrow = new THREE.ArrowHelper(
+										new THREE.Vector3(-1, 0, 0),
+										new THREE.Vector3(50, 0, 0),
+										8, 0x994400, 8, 3 );
+		ground.add(northarrow);
+
+		var winddir = new THREE.Mesh(
+										new THREE.SphereGeometry(1,5,5),
+										new THREE.MeshLambertMaterial({color: 0x007755}) );
+		winddir.rotation.y=Math.PI/2;
+		ground.add(winddir);
+
+		northarrow = new THREE.ArrowHelper(
+										new THREE.Vector3(-1, 0, 0),
+										new THREE.Vector3(20, 4, 0),
+										8, 0x440099, 3, 2 );
+		winddir.add(northarrow);
+
+		northarrow = new THREE.ArrowHelper(
+										new THREE.Vector3(-1, 0, 0),
+										new THREE.Vector3(20, 40, 0),
+										8, 0x440099, 3, 2 );
+		winddir.add(northarrow);
+		northarrow = new THREE.ArrowHelper(
+										new THREE.Vector3(-1, 0, 0),
+										new THREE.Vector3(20, 20, 0),
+										8, 0x440099, 3, 2 );
+		winddir.add(northarrow);
+
+		northarrow = new THREE.ArrowHelper(
+										new THREE.Vector3(-1, 0, 0),
+										new THREE.Vector3(20, 60, 0),
+										8, 0x440099, 3, 2 );
+		winddir.add(northarrow);
+
+
+		// create tower
+		var geometry = new THREE.CylinderGeometry( 1.2, 3, 120, 20 );
+		var material = new THREE.MeshLambertMaterial({color: 0xdddddd});
+		var cylinder = new THREE.Mesh( geometry, material );
+		cylinder.position.y=-30;
+		scene.add( cylinder );
+
+		// create a nacell
+		var cubeGeometry = new THREE.CubeGeometry(12,4,4);
+		var cubeMaterial = new THREE.MeshLambertMaterial({color: 0xff0000});
+		var nacelle = new THREE.Mesh(cubeGeometry, cubeMaterial);
+		nacelle.castShadow = true;
+
+		// position the cube
+		nacelle.position.x=0;
+		nacelle.position.y=30;
+		nacelle.position.z=0;
+
+		// add the cube to the scene
+		scene.add(nacelle);
+
+		// create hub
+		var sphereGeometry = new THREE.SphereGeometry(2,20,20);
+		var sphereMaterial = new THREE.MeshLambertMaterial({color: 0x7777ff});
+		var hub = new THREE.Mesh(sphereGeometry,sphereMaterial);
+
+		// position the sphere
+		hub.position.x=-7.5;
+		hub.position.y=0;
+		hub.position.z=0;
+		hub.castShadow=true;
+
+		// add the sphere to the scene
+		nacelle.add(hub);
+
+		// create blade1 axis
+		var blade1axist = new THREE.Mesh( 
+						new THREE.CylinderGeometry( 0.3, 0.3, 1, 3 ),
+						new THREE.MeshLambertMaterial({color: 0xdddddd}) );
+		blade1axist.rotation.x = Math.PI;
+		hub.add( blade1axist );
+		var blade1axis = new THREE.Mesh( 
+						new THREE.CylinderGeometry( 0.3, 0.3, 1, 3 ),
+						new THREE.MeshLambertMaterial({color: 0xdddddd}) );
+		blade1axist.add( blade1axis );
+
+		// create blade2 axis
+		var blade2axist = new THREE.Mesh( 
+						new THREE.CylinderGeometry( 0.3, 0.3, 0.1, 3 ),
+						new THREE.MeshLambertMaterial({color: 0xdddddd}) );
+		blade2axist.rotation.x = Math.PI/3
+		hub.add( blade2axist );
+
+		var blade2axis = new THREE.Mesh( 
+						new THREE.CylinderGeometry( 0.3, 0.3, 0.1, 3 ),
+						new THREE.MeshLambertMaterial({color: 0xdddddd}) );
+		blade2axist.add( blade2axis );
+		
+
+		// create blade3 axis
+		var blade3axist = new THREE.Mesh( 
+						new THREE.CylinderGeometry( 0.3, 0.3, 1, 3 ),
+						new THREE.MeshLambertMaterial({color: 0xdddddd}) );
+		blade3axist.rotation.x = -Math.PI/3
+		hub.add( blade3axist );
+		var blade3axis = new THREE.Mesh( 
+						new THREE.CylinderGeometry( 0.3, 0.3, 1, 3 ),
+						new THREE.MeshLambertMaterial({color: 0xdddddd}) );
+		blade3axist.add( blade3axis );
+
+
+		var blade;
+		var loader = new THREE.VRMLLoader();
+		loader.addEventListener( 'load', function ( event ) {
+			blade = event.content;
+			blade1axis.add(blade);
+			blade1axis.rotation.y = -0.7-Math.PI/2;
+
+			blade2axis.add(blade.clone());
+			blade2axis.rotation.y = -0.9-Math.PI/2; 
+
+			blade3axis.add(blade.clone());
+			blade3axis.rotation.y = -Math.PI/2; 
+
+		} );
+		loader.load( root + '/blade.wrl' );
+
+		// position and point the camera to the center of the scene
+		camera.position.x = -100;
+		camera.position.y = 100;
+		camera.position.z = 100;
+		camera.lookAt(scene.position);
+
+		// add subtle ambient lighting
+		var ambientLight = new THREE.AmbientLight(0x0c0c0c);
+		scene.add(ambientLight);
+
+		// add spotlight for the shadows
+		var spotLight = new THREE.SpotLight( 0xffffff );
+		spotLight.position.set( -100, 190, -100 );
+		spotLight.castShadow = true;
+		scene.add( spotLight );
+
+		var controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.target.set( 0, 2, 0 );
+		controls.update();
+
+
+		// add the output of the renderer to the html element
+		$("#threecanvas").append(renderer.domElement);
+		// call the render function
+		render();
+
+		function render() {
+				hub.rotation.x -= 0.01;
+
+				/*
+				blade1axis.rotation.y += step1*0.01; 
+				blade2axis.rotation.y += step2*0.01; 
+				blade3axis.rotation.y += step3*0.01; 
+
+				if ( blade1axis.rotation.y >= -0.7 ) step1 = -1;
+				if ( blade1axis.rotation.y <= -0.7-Math.PI/2 ) step1 = 1;
+				if ( blade2axis.rotation.y >= -0.9 ) step2 = -1;
+				if ( blade2axis.rotation.y <= -0.9-Math.PI/2 ) step2 = 1;
+				if ( blade3axis.rotation.y >= 0 ) step3 = -1;
+				if ( blade3axis.rotation.y <= -Math.PI/2 ) step3 = 1;
+				*/
+				
+				// render using requestAnimationFrame
+				if ( redraw ) {
+						redraw = false;
+						renderer.setSize( $('#threecanvas').width(), 
+															$('#threecanvas').height() );
+				}
+				requestAnimationFrame(render);
+				renderer.render(scene, camera);
+		}
+}
