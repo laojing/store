@@ -176,7 +176,7 @@ class ManagerController {
 		render(contentType:"text/json"){[data:"error"]}
 	}
 
-	@Secured ( ['ROLE_ADMIN'] )
+	@Secured ( ['ROLE_ADMIN','ROLE_STUDENT'] )
     def passwd() {
 	}
 
