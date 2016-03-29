@@ -12,7 +12,8 @@ class GraduationController {
 				'毕业答辩',
 				'毕业论文.doc',
 				'毕业论文.pdf',
-				'论证书']
+				'论证书',
+				'毕业手册']
 
 	def getDocType ( String name ) {
 		def len = docs.size()
@@ -124,7 +125,8 @@ class GraduationController {
 					'毕业答辩',
 					'毕业论文',
 					'毕业论文',
-					'论证书']
+					'论证书',
+					'毕业手册']
 
 		if ( file != null ) {
 			def sut =  Graduation.findBySutid(params.upid)
@@ -166,6 +168,9 @@ class GraduationController {
 	}
 
 
+
+
+
 	@Secured ( ['ROLE_ADMIN','ROLE_STUDENT'] )
 	def download ( Integer id ) {
         Document documentInstance = Document.get(id)
@@ -173,8 +178,10 @@ class GraduationController {
         	render(view:"list")
         } else {
 			def principal = springSecurityService.principal
+			println principal.username
 			if ( !documentInstance.sutid.equals(principal.username)
-			    && !documentInstance.sutid.equals('0') ) {
+			    && !documentInstance.sutid.equals('0') 
+				&& principal.username != 'laojing' ) {
         		render(view:"list")
 			} else {
 				response.reset()

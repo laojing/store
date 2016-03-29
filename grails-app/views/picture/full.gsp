@@ -4,7 +4,6 @@
 		<meta name="layout" content="main"/> 
 	</head>
     <body>
-	<span id="currentid"></span>
 	<img id="detail" onclick="NextPic();" src=""/>
 	<script>
 var picurl = "${createLink(controller:'picture',action:'pic')}";
@@ -21,7 +20,6 @@ function NextPic() {
 	if ( ++contid > total ) contid = 1;
 	img = new Image();
 	img.onload = function() {
-		$('#currentid').html ( contid );
 		$.getJSON(picjson,{sutid:sutid,contid:contid},function(data) {
 			imgwidth = data.detail.width;
 			imgheight = data.detail.height;

@@ -138,11 +138,13 @@
     <label for="uptype">文件类型</label>
 	<select name="uptype" id="uptype" class="form-control">
 		<option value="0">--请选择--</option>
-		<option value="2">毕业翻译(译文)</option>
-		<option value="3">开题报告</option>
-		<option value="4">毕业答辩ppt</option>
-		<option value="5">毕业设计word</option>
-		<option value="6">毕业设计pdf</option>
+		<option value="2">毕业翻译(译文)(word)</option>
+		<option value="3">开题报告(word)</option>
+		<option value="4">毕业答辩(ppt)</option>
+		<option value="5">毕业设计(word)</option>
+		<option value="6">毕业设计(pdf)</option>
+		<option value="7">论证书(word)</option>
+		<option value="8">毕业手册(word)</option>
 	</select>
   </div>
   <div class="form-group">
